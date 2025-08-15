@@ -1,8 +1,3 @@
-Got it — here’s the complete single markdown file with everything we discussed, ready to drop into your repo as `README.md`:
-
----
-
-```markdown
 # GPU Crash Troubleshooting Setup (Windows + NVIDIA RTX)
 
 This guide documents three complementary methods for capturing detailed crash data when troubleshooting NVIDIA GPU hangs, black screens, or driver resets on Windows.
@@ -38,12 +33,9 @@ Extends the time Windows waits before declaring the GPU unresponsive and resetti
 
 **How to Configure:**
 1. Open **Registry Editor** (`regedit`).
-2. Navigate to:
-```
+2. Navigate to: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
 
-HKEY\_LOCAL\_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers
 
-```
 3. Add or modify these **DWORD (32-bit)** values:
 - `TdrDelay` = `16` (decimal)
 - `TdrDdiDelay` = `10` (decimal)
@@ -65,12 +57,8 @@ Captures application crash dumps (full or mini) for any user-mode process, inclu
 
 **How to Configure (Global Dumps):**
 1. Open **Registry Editor** (`regedit`).
-2. Navigate to:
-```
+2. Navigate to: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
 
-HKEY\_LOCAL\_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps
-
-```
 *(Create the `LocalDumps` key if it doesn’t exist.)*
 3. Inside `LocalDumps`, add:
 - `DumpFolder` → **Expandable String Value** (`REG_EXPAND_SZ`) → e.g. `D:\CrashDumps`
@@ -103,12 +91,8 @@ Quickly see only the relevant GPU and crash events that occur before each system
 - `Kernel-Power`
 - `Kernel-EventTracing`
 - `EventLog`
-5. In **Event IDs**, enter:
-```
+5. In **Event IDs**, enter: 4101, 14, 1, 41
 
-4101, 14, 1, 41
-
-```
 - `4101` — Display driver stopped responding.
 - `14` — nvlddmkm device error.
 - `1` — Kernel-EventTracing errors.
@@ -138,8 +122,4 @@ You can also create a **Custom View** in Event Viewer with these same settings s
 3. Review Event Viewer filtered logs to correlate timestamps and error codes.
 
 ---
-```
-
----
-
-Do you want me to also add **a ready-to-import Custom View XML** so you can just drop it into Event Viewer without manually setting filters? That would make it a one-click setup.
+  
